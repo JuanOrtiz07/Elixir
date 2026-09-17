@@ -52,12 +52,15 @@ defmodule Telefonia do
     end
 
     defp generar_mensaje(decision, ahorro) do
+        costos_redondeados = numero_formateado(ahorro)
         case decision do
-            :plan_1 -> "Le conviene el plan 1, ahorra $#{Float.round(ahorro, 2)} al mes"
-            :plan_2 -> "Le conviene el plan 2, ahorra $#{Float.round(ahorro, 2)} al mes"
-            :empate -> "Los dos planes cuestan lo mismo, $#{Float.round(ahorro, 2)} al mes"
+            :plan_1 -> "Le conviene el plan 1, ahorra $#{costos_redondeados} al mes"
+            :plan_2 -> "Le conviene el plan 2, ahorra $#{costos_redondeados} al mes"
+            :empate -> "Los dos planes cuestan lo mismo, $#{costos_redondeados} al mes"
         end
     end
+
+    defp numero_formateado(numero), do: :erlang.float_to_binary(numero, decimals: 2)
 
 end
 
